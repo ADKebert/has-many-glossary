@@ -15,13 +15,11 @@ class TermsController < ApplicationController
   # GET /terms/new
   def new
     @term = Term.new
-    @categories = Category.all.order(:name)
   end
 
   # GET /terms/1/edit
   def edit
     authorize!(set_term, current_user)
-    @categories = Category.all.order(:name)
   end
 
   # POST /terms

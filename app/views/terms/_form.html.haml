@@ -15,7 +15,11 @@
   .form-group
     = f.label :author
     = f.text_field :author, class: "form-control"
-  .form-group
-    = f.collection_check_boxes(:category_ids,  Category.all, :id, :name)
+  .input-group
+    = f.collection_check_boxes(:category_ids,  Category.all, :id, :name) do |c|
+      %span.input-group-addon
+        = c.check_box
+      .form-control
+        = c.label
   .form-group
     = f.submit 'Save', class: "btn btn-primary"

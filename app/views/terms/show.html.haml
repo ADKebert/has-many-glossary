@@ -10,8 +10,9 @@
   %b Author:
   = @term.author
 %p
-  %b Category:
-  = @term.category.name
+  - unless @term.categories.empty?
+    %b Categories:
+    = @term.categories.map{ |category| category.name }.join(', ')
 
 .btn-group.btn-group-xs
   - if @term.owned_by_user?(current_user)

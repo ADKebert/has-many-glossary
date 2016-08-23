@@ -1,17 +1,29 @@
 %p#notice= notice
 
-%p
-  %b Name:
-  = @category.name
-%p
-  %b Subject area:
-  = @category.subject_area
-
-.btn-group.btn-group-xs
+.category-header
   - if @category.owned_by_user?(current_user)
-    %button.btn.btn-default{"aria-label" => "Left Align", :type => "button"}
-      = link_to 'Edit', edit_category_path(@category)
-    %button.btn.btn-default{"aria-label" => "Left Align", :type => "button"}
-      = link_to 'Delete', @category, :method => :delete, :data => { :confirm => 'Are you sure?' }
-  %button.btn.btn-default{"aria-label" => "Left Align", :type => "button"}
-    = link_to 'Back', categories_path
+    .btn-group.btn-group-xs
+      %button.btn.btn-default{"aria-label" => "Left Align", :type => "button"}
+        = link_to  edit_category_path(@category) do
+          %span.glyphicon.glyphicon-pencil
+      %button.btn.btn-default{"aria-label" => "Left Align", :type => "button"}
+        = link_to  @category, :method => :delete, :data => { :confirm => 'Are you sure?' } do
+          %span.glyphicon.glyphicon-trash
+  %h1
+    = @category.name
+    %small
+      = @category.subject_area
+
+%ul.list-group
+  - @category.terms.each do |term|
+    %li.list-group-item
+      %a{ href: "/terms/#{term.id}" }
+        = term.name
+      - if term.owned_by_user?(current_user)
+        .btn-group.btn-group-xs
+          %button.btn.btn-default{"aria-label" => "Left Align", :type => "button"}
+            = link_to  edit_term_path(term) do
+              %span.glyphicon.glyphicon-pencil
+          %button.btn.btn-default{"aria-label" => "Left Align", :type => "button"}
+            = link_to  term, :method => :delete, :data => { :confirm => 'Are you sure?' } do
+              %span.glyphicon.glyphicon-trash

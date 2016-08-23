@@ -1,24 +1,24 @@
-%p#notice= notice
+.center-gallery
+  .term-show
+    %p#notice= notice
+    .term-text
+      %p
+        %b
+          = "#{@term.name}:"
+        = @term.definition
+      %p
+        %b Author:
+        = @term.author
+      %p
+        - unless @term.categories.empty?
+          %b Categories:
+          = @term.categories.map{ |category| category.name }.join(', ')
 
-%p
-  %b Name:
-  = @term.name
-%p
-  %b Definition:
-  = @term.definition
-%p
-  %b Author:
-  = @term.author
-%p
-  - unless @term.categories.empty?
-    %b Categories:
-    = @term.categories.map{ |category| category.name }.join(', ')
-
-.btn-group.btn-group-xs
-  - if @term.owned_by_user?(current_user)
-    %button.btn.btn-default{"aria-label" => "Left Align", :type => "button"}
-      = link_to 'Edit', edit_term_path(@term)
-    %button.btn.btn-default{"aria-label" => "Left Align", :type => "button"}
-      = link_to 'Delete', @term, :method => :delete, :data => { :confirm => 'Are you sure?' }
-  %button.btn.btn-default{"aria-label" => "Left Align", :type => "button"}
-    = link_to 'Back', terms_path
+    .btn-group.btn-group-xs
+      - if @term.owned_by_user?(current_user)
+        %button.btn.btn-default{"aria-label" => "Left Align", :type => "button"}
+          = link_to 'Edit', edit_term_path(@term)
+        %button.btn.btn-default{"aria-label" => "Left Align", :type => "button"}
+          = link_to 'Delete', @term, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %button.btn.btn-default{"aria-label" => "Left Align", :type => "button"}
+        = link_to 'Back', terms_path

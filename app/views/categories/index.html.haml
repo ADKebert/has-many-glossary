@@ -1,0 +1,18 @@
+%h1 Categories
+
+%ul.list-group
+  - @categories.each do |category|
+    %li.list-group-item
+      %a{ href: "/categories/#{category.id}" }
+        = category.name
+      - if category.owned_by_user?(current_user)
+        .btn-group.btn-group-xs
+          %button.btn.btn-default{"aria-label" => "Left Align", :type => "button"}
+            = link_to  edit_category_path(category) do
+              %span.glyphicon.glyphicon-pencil
+          %button.btn.btn-default{"aria-label" => "Left Align", :type => "button"}
+            = link_to  category, :method => :delete, :data => { :confirm => 'Are you sure?' } do
+              %span.glyphicon.glyphicon-trash
+%br
+
+= link_to 'New Category', new_category_path

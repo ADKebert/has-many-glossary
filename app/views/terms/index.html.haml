@@ -5,14 +5,17 @@
     %li.list-group-item
       %a{ href: "/terms/#{term.id}" }
         = term.name
-      - if term.owned_by_user?(current_user)
-        .btn-group.btn-group-xs
-          %button.btn.btn-default{"aria-label" => "Left Align", :type => "button"}
-            = link_to  edit_term_path(term) do
-              %span.glyphicon.glyphicon-pencil
-          %button.btn.btn-default{"aria-label" => "Left Align", :type => "button"}
-            = link_to  term, :method => :delete, :data => { :confirm => 'Are you sure?' } do
-              %span.glyphicon.glyphicon-trash
+      .badge-and-btns
+        - if term.owned_by_user?(current_user)
+          .btn-group.btn-group-xs
+            %button.btn.btn-default{"aria-label" => "Left Align", :type => "button"}
+              = link_to  edit_term_path(term) do
+                %span.glyphicon.glyphicon-pencil
+            %button.btn.btn-default{"aria-label" => "Left Align", :type => "button"}
+              = link_to  term, :method => :delete, :data => { :confirm => 'Are you sure?' } do
+                %span.glyphicon.glyphicon-trash
+        %span.badge
+          = term.categories.count
 %br
 
 = link_to  new_term_path, class: "btn btn-primary" do

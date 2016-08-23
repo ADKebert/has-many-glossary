@@ -6,10 +6,12 @@
 %p
   %b Subject area:
   = @category.subject_area
-%p
-  %b User:
-  = @category.user_id
 
-= link_to 'Edit', edit_category_path(@category)
-\|
-= link_to 'Back', categories_path
+.btn-group.btn-group-xs
+  - if @category.owned_by_user?(current_user)
+    %button.btn.btn-default{"aria-label" => "Left Align", :type => "button"}
+      = link_to 'Edit', edit_category_path(@category)
+    %button.btn.btn-default{"aria-label" => "Left Align", :type => "button"}
+      = link_to 'Delete', @category, :method => :delete, :data => { :confirm => 'Are you sure?' }
+  %button.btn.btn-default{"aria-label" => "Left Align", :type => "button"}
+    = link_to 'Back', categories_path

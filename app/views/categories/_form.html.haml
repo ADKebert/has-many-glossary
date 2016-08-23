@@ -6,11 +6,20 @@
         - @category.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
+  .form-group
     = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :subject_area
-    = f.text_field :subject_area
-  .actions
-    = f.submit 'Save'
+    = f.text_field :name, class: "form-control"
+  .form-group
+    .input-group
+      .span.input-group-addon
+        %input{ id: "BEE", type: "radio", name: "category[subject_area]", value: "Back End Engineering" }
+      .form-control
+        %label{ for: "BEE" }
+          Back End Engineering
+      .span.input-group-addon
+        %input{ id: "FEE", type: "radio", name: "category[subject_area]", value: "Front End Engineering" }
+      .form-control
+        %label{ for: "BEE" }
+          Front End Engineering
+  .form-group
+    = f.submit 'Save', class: "btn btn-primary"

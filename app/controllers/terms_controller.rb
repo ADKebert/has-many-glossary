@@ -75,6 +75,6 @@ class TermsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def term_params
-    params.require(:term).permit(:name, :definition, :author, :category_id)
+    params.require(:term).permit(:name, :definition, :author, category_ids: [] )
   end
 end

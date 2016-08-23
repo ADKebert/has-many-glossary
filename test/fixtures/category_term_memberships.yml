@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  term_id: one
+  category_id: one
+
+two:
+  term_id: two
+  category_id: two

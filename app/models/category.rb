@@ -1,5 +1,5 @@
 class Category < ApplicationRecord
-  has_many :terms
+  has_many :terms, through: :category_term_memberships
   belongs_to :user
 
   def owned_by_user?(asking_user)

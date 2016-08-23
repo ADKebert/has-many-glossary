@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160823002443) do
+ActiveRecord::Schema.define(version: 20160823174857) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,13 +23,21 @@ ActiveRecord::Schema.define(version: 20160823002443) do
     t.datetime "updated_at",   null: false
   end
 
+  create_table "category_term_memberships", force: :cascade do |t|
+    t.integer  "term_id"
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["category_id"], name: "index_category_term_memberships_on_category_id", using: :btree
+    t.index ["term_id"], name: "index_category_term_memberships_on_term_id", using: :btree
+  end
+
   create_table "terms", force: :cascade do |t|
     t.string   "name"
     t.string   "author"
-    t.integer  "category_id"
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string   "definition"
   end
 
@@ -43,4 +51,6 @@ ActiveRecord::Schema.define(version: 20160823002443) do
     t.datetime "updated_at",   null: false
   end
 
+  add_foreign_key "category_term_memberships", "categories"
+  add_foreign_key "category_term_memberships", "terms"
 end

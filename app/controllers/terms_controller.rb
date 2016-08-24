@@ -4,7 +4,8 @@ class TermsController < ApplicationController
   # GET /terms
   # GET /terms.json
   def index
-    @terms = Term.all
+    @terms = params[:search] ? Term.where("name LIKE ? or definition LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%") :
+                               Term.all.order(:name)
   end
 
   # GET /terms/1

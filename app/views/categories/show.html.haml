@@ -17,8 +17,7 @@
 %ul.list-group
   - @category.terms.each do |term|
     %li.list-group-item
-      %a{ href: "/terms/#{term.id}" }
-        = term.name
+      = link_to term.name, term
       - if term.owned_by_user?(current_user)
         .btn-group.btn-group-xs
           %button.btn.btn-default{"aria-label" => "Left Align", :type => "button"}
